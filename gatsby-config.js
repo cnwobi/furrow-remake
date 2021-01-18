@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -24,6 +26,15 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          '~': path.join(__dirname, 'src'),
+        },
+        extensions: ['js'],
       },
     },
     `gatsby-plugin-styled-components`,
