@@ -1,20 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-type CursorState = {
-  x: number;
-  y: number;
-};
-
-export const useMouseMove = () => {
-  const initial: CursorState = {
-    x: 500,
-    y: 500,
-  };
-  const [{ x, y }, setMousePosition] = useState(initial);
-
+export const useMouseMove = (
+  cursor: React.MutableRefObject<HTMLDivElement>
+) => {
   const onMouseMove = (event: MouseEvent) => {
-    const { pageX: x, pageY: y } = event;
-    setMousePosition({ x, y });
+    const { clientX, clientY } = event;
+    cursor.current.style.left = `${clientX}px`;
+    cursor.current.style.top = `${clientY}px`;
   };
 
   useEffect(() => {
@@ -23,6 +15,4 @@ export const useMouseMove = () => {
       document.removeEventListener('mousemove', onMouseMove);
     };
   }, []);
-
-  return { x, y };
 };

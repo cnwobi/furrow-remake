@@ -1,31 +1,40 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
 type Theme = 'light' | 'dark';
+export type CursorType = 'pointer' | 'hovered' | undefined;
+
 type State = {
   currentTheme: Theme;
+  cursorType: CursorType;
 };
 
-type ActionType = 'TOGGLE_THEME';
+type ActionType = 'TOGGLE_THEME' | 'CURSOR_TYPE';
 type Action = {
   type: ActionType;
-  theme: Theme;
+  theme?: Theme;
+  cursorType?: CursorType;
 };
 
-const GlobalStateContext = createContext(undefined);
-const GlobalDispatchContext = createContext(undefined);
+const GlobalStateContext = createContext<State>(undefined);
+const GlobalDispatchContext = createContext<React.Dispatch<Action>>(undefined);
 
 type GlobalReducer = (state: State, action: Action) => State;
 
-const globalReducer: GlobalReducer = (state, action) => {
-  switch (action.type) {
+const globalReducer: GlobalReducer = (state, { type, theme, cursorType }) => {
+  switch (type) {
     case 'TOGGLE_THEME': {
       return {
         ...state,
-        currentTheme: action.theme,
+        currentTheme: theme,
       };
     }
+    case 'CURSOR_TYPE':
+      return {
+        ...state,
+        cursorType: cursorType,
+      };
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${type}`);
     }
   }
 };
@@ -38,6 +47,7 @@ const getStoredThemeOrDefault = () =>
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: getStoredThemeOrDefault() as Theme,
+    cursorType: 'pointer',
   });
   return (
     <GlobalDispatchContext.Provider value={dispatch}>

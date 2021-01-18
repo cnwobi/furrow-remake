@@ -1,5 +1,6 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import { OnCursor } from '~/components/layout';
 import {
   useGlobalDispatchContext,
   useGlobalStateContext,
@@ -8,7 +9,10 @@ import { useSetLocalStorageTheme } from '~/hooks/useSetLocalStorageTheme';
 import * as Styled from './styles';
 import * as GlobalStyled from '~/components/GlobalStyles';
 
-const Header = () => {
+interface Props {
+  onCursor: OnCursor;
+}
+const Header = ({ onCursor }: Props) => {
   const { currentTheme } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
   useSetLocalStorageTheme(currentTheme);
@@ -28,9 +32,16 @@ const Header = () => {
     >
       <GlobalStyled.Container>
         <GlobalStyled.Flex spaceBetween noHeight>
-          <Styled.Logo>
+          <Styled.Logo
+            onMouseEnter={() => onCursor('hovered')}
+            onMouseLeave={() => onCursor(undefined)}
+          >
             <Link to="/">FURR</Link>
-            <span onClick={toggleTheme} />
+            <span
+              onClick={toggleTheme}
+              onMouseEnter={() => onCursor('pointer')}
+              onMouseLeave={() => onCursor(undefined)}
+            />
             <Link to="/">W</Link>
           </Styled.Logo>
           <Styled.Menu>

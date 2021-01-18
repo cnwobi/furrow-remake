@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useGlobalStateContext } from '~/context/context';
 import { useMouseMove } from '~/hooks/useMouseMove';
 import * as Styled from './styles';
 
 const Cursor = () => {
-  const { x, y } = useMouseMove();
-
+  const { cursorType } = useGlobalStateContext();
+  const cursor = useRef<HTMLDivElement>(null);
+  useMouseMove(cursor);
   return (
     <>
-      <Styled.Cursor style={{ left: `${x}px`, top: `${y}px` }} />
+      <Styled.Cursor className={`${cursorType}`} ref={cursor} />
     </>
   );
 };

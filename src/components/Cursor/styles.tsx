@@ -15,6 +15,10 @@ export const Cursor = styled.div`
   pointer-events: none;
   z-index: 999;
   &.pointer {
+    background: transparent !important;
+    width: 56px;
+    height: 56px;
+    border: 4px solid #ea281e;
     border: 4px solid ${props => props.theme.text} !important;
   }
   &.hovered {
