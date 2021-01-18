@@ -1,20 +1,22 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
-type CurrentTheme = 'light' | 'dark';
+type Theme = 'light' | 'dark';
 type State = {
-  currentTheme: CurrentTheme;
+  currentTheme: Theme;
 };
 
 type ActionType = 'TOGGLE_THEME';
 type Action = {
   type: ActionType;
-  theme: string;
+  theme: Theme;
 };
 
 const GlobalStateContext = createContext(undefined);
 const GlobalDispatchContext = createContext(undefined);
 
-const globalReducer = (state: State, action: Action) => {
+type GlobalReducer = (state: State, action: Action) => State;
+
+const globalReducer: GlobalReducer = (state, action) => {
   switch (action.type) {
     case 'TOGGLE_THEME': {
       return {
@@ -35,7 +37,7 @@ const getStoredThemeOrDefault = () =>
 
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, {
-    currentTheme: getStoredThemeOrDefault(),
+    currentTheme: getStoredThemeOrDefault() as Theme,
   });
   return (
     <GlobalDispatchContext.Provider value={dispatch}>

@@ -40,6 +40,7 @@ type Theme = {
 };
 
 const Layout = ({ children }: Props) => {
+  // @ts-ignore
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {

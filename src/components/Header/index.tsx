@@ -11,7 +11,6 @@ import * as GlobalStyled from '~/components/GlobalStyles';
 const Header = () => {
   const { currentTheme } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
-
   useSetLocalStorageTheme(currentTheme);
 
   const toggleTheme = () =>
@@ -31,13 +30,13 @@ const Header = () => {
         <GlobalStyled.Flex spaceBetween noHeight>
           <Styled.Logo>
             <Link to="/">FURR</Link>
-            <span onClick={toggleTheme}></span>
+            <span onClick={toggleTheme} />
             <Link to="/">W</Link>
           </Styled.Logo>
           <Styled.Menu>
             <button>
-              <span></span>
-              <span></span>
+              <span />
+              <span />
             </button>
           </Styled.Menu>
         </GlobalStyled.Flex>
