@@ -31,7 +31,7 @@ const Header = ({ onCursor }: Props) => {
       transition={transition}
     >
       <GlobalStyled.Container>
-        <GlobalStyled.Flex spaceBetween noHeight>
+        <GlobalStyled.Flex spaceBetween={true} noHeight={true}>
           <Styled.Logo
             onMouseEnter={() => onCursor('hovered')}
             onMouseLeave={() => onCursor(undefined)}

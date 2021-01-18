@@ -1,6 +1,10 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import {
+  createGlobalStyle,
+  DefaultTheme,
+  ThemeProvider,
+} from 'styled-components';
 import { normalize } from 'styled-normalize';
 import Cursor from '~/components/Cursor';
 import Header from '~/components/Header';
@@ -38,11 +42,6 @@ const GlobalStyle = createGlobalStyle`
 
   }
 `;
-type Theme = {
-  background: string;
-  text: string;
-  red: string;
-};
 
 export type OnCursor = (cursorType: CursorType) => any;
 
@@ -57,13 +56,13 @@ const Layout = ({ children }: Props) => {
       }
     }
   `);
-  const darkTheme: Theme = {
+  const darkTheme: DefaultTheme = {
     background: '#000',
     text: '#fff',
     red: '#ea291e',
   };
 
-  const lightTheme: Theme = {
+  const lightTheme: DefaultTheme = {
     background: '#fff',
     text: '#000',
     red: '#ea291e',
