@@ -1,12 +1,13 @@
-import { graphql, useStaticQuery } from 'gatsby'
-import * as React from 'react'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { normalize } from 'styled-normalize'
-import Header from '~/components/Header'
+import { graphql, useStaticQuery } from 'gatsby';
+import * as React from 'react';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { normalize } from 'styled-normalize';
+import Header from '~/components/Header';
+import { useGlobalStateContext } from '~/context/context';
 
 type Props = {
-  children: React.ReactNode
-}
+  children?: React.ReactNode;
+};
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -31,24 +32,12 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
 
   }
-`
+`;
 type Theme = {
-  background: string
-  text: string
-  red: string
-}
-
-const darkTheme: Theme = {
-  background: '#000',
-  text: '#fff',
-  red: '#ea291e',
-}
-
-const lightTheme: Theme = {
-  background: '#fff',
-  text: '#000',
-  red: '#ea291e',
-}
+  background: string;
+  text: string;
+  red: string;
+};
 
 const Layout = ({ children }: Props) => {
   const data = useStaticQuery(graphql`
@@ -59,15 +48,28 @@ const Layout = ({ children }: Props) => {
         }
       }
     }
-  `)
-  console.log(data)
+  `);
+  const darkTheme: Theme = {
+    background: '#000',
+    text: '#fff',
+    red: '#ea291e',
+  };
+
+  const lightTheme: Theme = {
+    background: '#fff',
+    text: '#000',
+    red: '#ea291e',
+  };
+  const { currentTheme } = useGlobalStateContext();
+  const getThemeObject = currentTheme =>
+    currentTheme === 'light' ? lightTheme : darkTheme;
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={getThemeObject(currentTheme)}>
       <GlobalStyle />
       <Header />
       <main>{children}</main>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
