@@ -2,6 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import Cursor from '~/components/Cursor';
 import Header from '~/components/Header';
 import { useGlobalStateContext } from '~/context/context';
 
@@ -13,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   ${normalize}
   * {
     text-decoration: none;
-    //cursor: none;
+    cursor: none;
   }
 
   html {
@@ -67,6 +68,7 @@ const Layout = ({ children }: Props) => {
   return (
     <ThemeProvider theme={getThemeObject(currentTheme)}>
       <GlobalStyle />
+      <Cursor />
       <Header />
       <main>{children}</main>
     </ThemeProvider>
