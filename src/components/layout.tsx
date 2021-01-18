@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   ${normalize}
   * {
     text-decoration: none;
-    cursor: none;
+    //cursor: none;
   }
 
   html {
@@ -35,16 +35,19 @@ const GlobalStyle = createGlobalStyle`
 type Theme = {
   background: string
   text: string
+  red: string
 }
 
-// const darkTheme: Theme = {
-//   background: '#000',
-//   text: '#fff',
-// }
+const darkTheme: Theme = {
+  background: '#000',
+  text: '#fff',
+  red: '#ea291e',
+}
 
 const lightTheme: Theme = {
   background: '#fff',
   text: '#000',
+  red: '#ea291e',
 }
 
 const Layout = ({ children }: Props) => {
