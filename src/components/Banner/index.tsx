@@ -21,6 +21,7 @@ const Banner = ({ onCursor }: Props) => {
         loop={true}
         autoPlay={true}
         src={require('~/assets/video/video.mp4')}
+        muted={true}
       />
       <Styled.Canvas
         ref={canvas}
