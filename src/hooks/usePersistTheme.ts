@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const useSetLocalStorageTheme = currentTheme => {
+export const usePersistTheme = currentTheme => {
   useEffect(() => {
     window.localStorage.setItem('theme', currentTheme);
   }, [currentTheme]);

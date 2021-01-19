@@ -46,16 +46,20 @@ export const useEraseCanvas: UseEraseCanvas = (
       if (moving) {
         drawingCtx.globalCompositeOperation = 'source-over';
         renderingCtx.globalCompositeOperation = 'destination-out';
+
         const currentX = ev.pageX - renderingElement.offsetLeft;
         const currentY = ev.pageY - renderingElement.offsetTop;
+
         drawingCtx.lineJoin = 'round';
         drawingCtx.moveTo(lastX, lastY);
         drawingCtx.lineTo(currentX, currentY);
         drawingCtx.closePath();
         drawingCtx.lineWidth = 120;
         drawingCtx.stroke();
+
         lastX = currentX;
         lastY = currentY;
+
         renderingCtx.drawImage(drawingElement, 0, 0);
       }
     };
