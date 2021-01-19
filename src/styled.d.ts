@@ -6,7 +6,7 @@ declare module 'styled-components' {
     background: string;
     text: string;
     red: string;
-    top?: number;
-    left?: number;
+    top?: string;
+    left?: string;
   }
 }

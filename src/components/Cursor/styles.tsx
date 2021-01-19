@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Cursor = styled.div`
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 400px;
   left: 400px;
@@ -31,9 +33,13 @@ export const Cursor = styled.div`
     background: transparent !important;
     width: 56px;
     height: 56px;
-    border: 4px solid ${props => props.theme.text} !important;
+    border: 4px solid ${props => props.theme.red} !important;
     top: ${props => props.theme.top} !important;
     left: ${props => props.theme.left} !important;
+    span {
+      position: relative;
+      left: -250%;
+    }
   }
   &.nav-open {
     background: ${props => props.theme.text};
@@ -42,4 +48,10 @@ export const Cursor = styled.div`
   &.locked {
     border: 4px solid ${props => props.theme.text} !important;
   }
+`;
+
+export const Text = styled.span`
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: ${props => props.theme.text};
 `;
