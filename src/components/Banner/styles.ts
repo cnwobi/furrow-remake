@@ -5,14 +5,15 @@ export const Banner = styled.div`
   height: 100vh;
   width: 100%;
   position: relative;
-  margin-bottom: 200px;
+  margin-bottom: 296px;
 `;
 
 export const Title = styled.h1`
   position: absolute;
   bottom: -120px;
   left: -18px;
-  color: ${props => props.theme.background};
+  color: ${props => props.theme.text};
+  pointer-events: none;
 `;
 
 export const Video = styled.video`

@@ -8,14 +8,12 @@ import {
 import { normalize } from 'styled-normalize';
 import Cursor from '~/components/Cursor';
 import Header from '~/components/Header';
-import {
-  CursorType,
-  useGlobalDispatchContext,
-  useGlobalStateContext,
-} from '~/context/context';
+import { CursorType, useGlobalStateContext } from '~/context/context';
 
+export type OnCursor = (cursorType: CursorType) => any;
 type Props = {
   children?: React.ReactNode;
+  onCursor: OnCursor;
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -43,9 +41,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export type OnCursor = (cursorType: CursorType) => any;
-
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, onCursor }: Props) => {
   // @ts-ignore
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -68,13 +64,8 @@ const Layout = ({ children }: Props) => {
     red: '#ea291e',
   };
   const { currentTheme } = useGlobalStateContext();
-  const dispatch = useGlobalDispatchContext();
   const getThemeObject = currentTheme =>
     currentTheme === 'light' ? lightTheme : darkTheme;
-
-  const onCursor: OnCursor = (cursorType?: CursorType) =>
-    dispatch({ type: 'CURSOR_TYPE', cursorType });
-
   return (
     <ThemeProvider theme={getThemeObject(currentTheme)}>
       <GlobalStyle />

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
-type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';
 export type CursorType = 'pointer' | 'hovered' | undefined;
 
 type State = {
@@ -47,7 +47,7 @@ const getStoredThemeOrDefault = () =>
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: getStoredThemeOrDefault() as Theme,
-    cursorType: 'pointer',
+    cursorType: undefined,
   });
   return (
     <GlobalDispatchContext.Provider value={dispatch}>
