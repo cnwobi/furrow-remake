@@ -13,7 +13,7 @@ import { CursorType, useGlobalStateContext } from '~/context/context';
 export type OnCursor = (cursorType: CursorType) => any;
 type Props = {
   children?: React.ReactNode;
-  onCursor: OnCursor;
+  onCursor?: OnCursor;
 };
 
 const GlobalStyle = createGlobalStyle`

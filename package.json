@@ -14,7 +14,7 @@
     "gatsby-plugin-manifest": "^2.2.48",
     "gatsby-plugin-offline": "^3.0.41",
     "gatsby-plugin-react-helmet": "^3.1.24",
-    "gatsby-plugin-sharp": "^2.4.13",
+    "gatsby-plugin-sharp": "^2.12.2",
     "gatsby-plugin-styled-components": "^3.2.1",
     "gatsby-source-filesystem": "^2.1.56",
     "gatsby-transformer-sharp": "^2.3.19",
@@ -34,6 +34,12 @@
   },
   "devDependencies": {
     "prettier": "^1.19.1"
+  },
+  "resolutions": {
+    "node-fetch": "2.6.1",
+    "bl": "4.0.3",
+    "axios": "0.21.1",
+    "lodash": "4.17.20"
   },
   "keywords": [
     "gatsby"
