@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
 export type Theme = 'light' | 'dark';
-export type CursorType = 'pointer' | 'hovered' | undefined;
+export type CursorType = 'pointer' | 'hovered' | 'locked' | undefined;
 
 type State = {
   currentTheme: Theme;

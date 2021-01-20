@@ -9,7 +9,11 @@ const Cursor = () => {
   useMouseMove(cursor);
   return (
     <>
-      <Styled.Cursor className={`${cursorType}`} ref={cursor} />
+      <Styled.Cursor className={`${cursorType}`} ref={cursor}>
+        <Styled.Text style={{ opacity: cursorType === 'locked' ? 1 : 0 }}>
+          Projects
+        </Styled.Text>
+      </Styled.Cursor>
     </>
   );
 };

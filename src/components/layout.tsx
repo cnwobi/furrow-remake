@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby';
+import { useState } from 'react';
 import * as React from 'react';
 import {
   createGlobalStyle,
@@ -7,7 +8,7 @@ import {
 } from 'styled-components';
 import { normalize } from 'styled-normalize';
 import Cursor from '~/components/Cursor';
-import Header from '~/components/Header';
+import Header, { Position } from '~/components/Header';
 import { CursorType, useGlobalStateContext } from '~/context/context';
 
 export type OnCursor = (cursorType: CursorType) => any;
@@ -52,25 +53,37 @@ const Layout = ({ children, onCursor }: Props) => {
       }
     }
   `);
+  const initialPosition: Position = {
+    x: 0,
+    y: 0,
+  };
+
+  const [{ x, y }, setHamburgerPosition] = useState(initialPosition);
+
   const darkTheme: DefaultTheme = {
     background: '#000',
     text: '#fff',
     red: '#ea291e',
+    top: `${y}px`,
+    left: `${x}px`,
   };
 
   const lightTheme: DefaultTheme = {
     background: '#fff',
     text: '#000',
     red: '#ea291e',
+    top: `${y}px`,
+    left: `${x}px`,
   };
   const { currentTheme } = useGlobalStateContext();
   const getThemeObject = currentTheme =>
     currentTheme === 'light' ? lightTheme : darkTheme;
+
   return (
     <ThemeProvider theme={getThemeObject(currentTheme)}>
       <GlobalStyle />
       <Cursor />
-      <Header onCursor={onCursor} />
+      <Header onCursor={onCursor} setHamburgerPosition={setHamburgerPosition} />
       <main>{children}</main>
     </ThemeProvider>
   );

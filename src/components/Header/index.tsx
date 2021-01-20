@@ -1,46 +1,36 @@
-import { Link } from 'gatsby';
-import React from 'react';
+import React, { useRef } from 'react';
+import * as GlobalStyled from '~/components/GlobalStyles';
+import HamburgerMenu from '~/components/HamburgerMenu';
 import { OnCursor } from '~/components/layout';
+import Logo from '~/components/Logo';
 import {
   useGlobalDispatchContext,
   useGlobalStateContext,
 } from '~/context/context';
+import useElementPosition from '~/hooks/useElementPosition';
 import { usePersistTheme } from '~/hooks/usePersistTheme';
 import * as Styled from './styles';
-import * as GlobalStyled from '~/components/GlobalStyles';
 
 interface Props {
   onCursor: OnCursor;
+  position?: Position;
+  ref?: React.RefObject<HTMLDivElement> | ((instance: HTMLDivElement) => void);
+  setHamburgerPosition?: React.Dispatch<React.SetStateAction<Position>>;
 }
 
-const HamburgerMenu = () => (
-  <Styled.Menu>
-    <button>
-      <span />
-      <span />
-    </button>
-  </Styled.Menu>
-);
+export interface Position {
+  x: number;
+  y: number;
+}
 
-const Logo = ({ onCursor, toggleTheme }) => (
-  <Styled.Logo
-    onMouseEnter={() => onCursor('hovered')}
-    onMouseLeave={() => onCursor(undefined)}
-  >
-    <Link to="/">FURR</Link>
-    <span
-      onClick={toggleTheme}
-      onMouseEnter={() => onCursor('pointer')}
-      onMouseLeave={() => onCursor(undefined)}
-    />
-    <Link to="/">W</Link>
-  </Styled.Logo>
-);
-
-const Header = ({ onCursor }: Props) => {
+const Header = ({ onCursor, setHamburgerPosition }: Props) => {
   const { currentTheme } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
+
   usePersistTheme(currentTheme);
+
+  const hamburger = useRef(null);
+  const { x, y } = useElementPosition(hamburger);
 
   const toggleTheme = () =>
     currentTheme === 'dark'
@@ -48,6 +38,11 @@ const Header = ({ onCursor }: Props) => {
       : dispatch({ type: 'TOGGLE_THEME', theme: 'dark' });
 
   const { animate, initial, transition } = Styled.headerMotionProps;
+
+  const handleMouseEnter = () => {
+    onCursor('locked');
+    setHamburgerPosition({ x, y });
+  };
 
   return (
     <Styled.HeaderWrapper
@@ -58,7 +53,10 @@ const Header = ({ onCursor }: Props) => {
       <GlobalStyled.Container>
         <GlobalStyled.Flex spaceBetween={true} noHeight={true}>
           <Logo onCursor={onCursor} toggleTheme={toggleTheme} />
-          <HamburgerMenu />
+          <HamburgerMenu
+            onMouseEnter={handleMouseEnter}
+            hamburger={hamburger}
+          />
         </GlobalStyled.Flex>
       </GlobalStyled.Container>
     </Styled.HeaderWrapper>
