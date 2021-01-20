@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { OnCursor } from '~/components/layout';
 import { useGlobalStateContext } from '~/context/context';
-import { useEraseCanvas } from '~/hooks/useEraseCanvas';
+import { useEraseCanvas } from '~/hooks/useEraserEffect';
 import { useWindowSize } from '~/hooks/useWindowSize';
 import * as Styled from './styles';
 

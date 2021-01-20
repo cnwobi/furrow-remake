@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Styled from '~/components/Header/styles';
+import * as Styled from '~/components/HamburgerMenu/styles';
 
 interface MenuProps {
   onMouseEnter: () => void;

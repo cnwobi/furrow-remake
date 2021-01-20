@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const useElementPosition = (el: React.MutableRefObject<HTMLDivElement>) => {
+const useElementPosition = (el: React.MutableRefObject<HTMLElement>) => {
   const [elementPosition, setElementPosition] = useState({
     x: 0,
     y: 0,

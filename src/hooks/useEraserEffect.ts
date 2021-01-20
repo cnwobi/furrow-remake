@@ -5,13 +5,13 @@ type WindowSize = {
   width: number;
   height: number;
 };
-type UseEraseCanvas = (
+type UseEraserEffect = (
   canvas: React.MutableRefObject<HTMLCanvasElement>,
   size: WindowSize,
   currentTheme: Theme
 ) => void;
 
-export const useEraseCanvas: UseEraseCanvas = (
+export const useEraseCanvas: UseEraserEffect = (
   canvas,
   { width, height },
   currentTheme

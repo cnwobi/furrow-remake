@@ -36,16 +36,11 @@ export const Cursor = styled.div`
     border: 4px solid ${props => props.theme.red} !important;
     top: ${props => props.theme.top} !important;
     left: ${props => props.theme.left} !important;
-    span {
-      position: relative;
-      left: -250%;
-    }
   }
   &.nav-open {
     background: ${props => props.theme.text};
   }
-  &.nav-open,
-  &.locked {
+  &.nav-open {
     border: 4px solid ${props => props.theme.text} !important;
   }
 `;
@@ -54,4 +49,6 @@ export const Text = styled.span`
   font-size: 1.8rem;
   font-weight: 800;
   color: ${props => props.theme.text};
+  position: relative;
+  left: -250%;
 `;
